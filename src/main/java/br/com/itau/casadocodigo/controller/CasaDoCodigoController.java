@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -25,9 +26,9 @@ public class CasaDoCodigoController {
      * @return um Json de id, nome e data/hora
      */
     @PostMapping(value = "/v1/casadocodigo")
+    @Transactional
     public ResponseEntity<AutorResponse> gravar(@RequestBody @Valid AutorRequest autorRequest){
-        Autor autor = autorRequest.toModel();
-        casaDoCodigoService.cadastraAutor(autor);
+        Autor autor = casaDoCodigoService.cadastraAutor(autorRequest);
         return ResponseEntity.status(HttpStatus.OK).body(new AutorResponse(autor));
     }
 }

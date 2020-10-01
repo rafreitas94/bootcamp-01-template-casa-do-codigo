@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Autor {
@@ -18,14 +18,13 @@ public class Autor {
     private String nome;
     private String email;
     private String descricao;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date horaCadastro;
+    private LocalDateTime horaCadastro;
 
     @Deprecated
     public Autor(){}
 
     /**
-     * Contagem de carga intrínseca na Service: ?
+     * Contagem de carga intrínseca na Service: 0
      * @param nome Nome do autor
      * @param email Email do Autor
      * @param descricao Descricao do assunto
@@ -68,11 +67,11 @@ public class Autor {
         this.descricao = descricao;
     }
 
-    public Date getHoraCadastro() {
+    public LocalDateTime getHoraCadastro() {
         return horaCadastro;
     }
 
-    public void setHoraCadastro(Date horaCadastro) {
+    public void setHoraCadastro(LocalDateTime horaCadastro) {
         this.horaCadastro = horaCadastro;
     }
 }

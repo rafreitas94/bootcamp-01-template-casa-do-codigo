@@ -2,13 +2,13 @@ package br.com.itau.casadocodigo.dto;
 
 import br.com.itau.casadocodigo.model.Autor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class AutorResponse {
 
     private final String id;
     private final String nome;
-    private final Date horaCadastro;
+    private final LocalDateTime horaCadastro;
 
     public String getId() {
         return id;
@@ -18,7 +18,7 @@ public class AutorResponse {
         return nome;
     }
 
-    public Date getHoraCadastro() {
+    public LocalDateTime getHoraCadastro() {
         return horaCadastro;
     }
 
