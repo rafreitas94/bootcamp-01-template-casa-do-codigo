@@ -2,13 +2,10 @@ package br.com.itau.casadocodigo.service;
 
 import br.com.itau.casadocodigo.dto.AutorRequest;
 import br.com.itau.casadocodigo.model.Autor;
-import br.com.itau.casadocodigo.repository.CasaDoCodigoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.swing.text.html.parser.Entity;
 import java.time.LocalDateTime;
 
 @Service
