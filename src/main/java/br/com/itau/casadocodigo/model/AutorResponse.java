@@ -1,6 +1,4 @@
-package br.com.itau.casadocodigo.dto;
-
-import br.com.itau.casadocodigo.model.Autor;
+package br.com.itau.casadocodigo.model;
 
 import java.time.LocalDateTime;
 

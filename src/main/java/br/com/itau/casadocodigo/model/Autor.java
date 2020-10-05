@@ -2,7 +2,9 @@ package br.com.itau.casadocodigo.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -18,7 +20,7 @@ public class Autor {
     private String nome;
     private String email;
     private String descricao;
-    private LocalDateTime horaCadastro;
+    private LocalDateTime horaCadastro = LocalDateTime.now();
 
     @Deprecated
     public Autor(){}
