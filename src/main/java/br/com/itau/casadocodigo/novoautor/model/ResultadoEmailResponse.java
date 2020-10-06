@@ -1,4 +1,4 @@
-package br.com.itau.casadocodigo.model;
+package br.com.itau.casadocodigo.novoautor.model;
 
 public class ResultadoEmailResponse {
 

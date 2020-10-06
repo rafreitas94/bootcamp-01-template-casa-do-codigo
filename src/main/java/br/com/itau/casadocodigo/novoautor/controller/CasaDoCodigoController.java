@@ -1,10 +1,10 @@
-package br.com.itau.casadocodigo.controller;
+package br.com.itau.casadocodigo.novoautor.controller;
 
-import br.com.itau.casadocodigo.model.Autor;
-import br.com.itau.casadocodigo.model.AutorRequest;
-import br.com.itau.casadocodigo.model.AutorResponse;
-import br.com.itau.casadocodigo.model.ResultadoEmailResponse;
-import br.com.itau.casadocodigo.repository.CasaDoCodigoRepository;
+import br.com.itau.casadocodigo.novoautor.model.Autor;
+import br.com.itau.casadocodigo.novoautor.model.AutorRequest;
+import br.com.itau.casadocodigo.novoautor.model.AutorResponse;
+import br.com.itau.casadocodigo.novoautor.model.ResultadoEmailResponse;
+import br.com.itau.casadocodigo.novoautor.repository.CasaDoCodigoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

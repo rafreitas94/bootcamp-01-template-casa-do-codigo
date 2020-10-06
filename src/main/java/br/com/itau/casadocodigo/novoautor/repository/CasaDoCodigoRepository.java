@@ -1,6 +1,6 @@
-package br.com.itau.casadocodigo.repository;
+package br.com.itau.casadocodigo.novoautor.repository;
 
-import br.com.itau.casadocodigo.model.Autor;
+import br.com.itau.casadocodigo.novoautor.model.Autor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

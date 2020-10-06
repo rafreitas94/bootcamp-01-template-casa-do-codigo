@@ -1,4 +1,4 @@
-package br.com.itau.casadocodigo.model;
+package br.com.itau.casadocodigo.novoautor.model;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package br.com.itau.casadocodigo.model;
+package br.com.itau.casadocodigo.novoautor.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
