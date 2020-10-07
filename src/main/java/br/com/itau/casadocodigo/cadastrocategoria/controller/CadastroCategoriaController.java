@@ -4,8 +4,12 @@ import br.com.itau.casadocodigo.cadastrocategoria.model.Categoria;
 import br.com.itau.casadocodigo.cadastrocategoria.model.CategoriaRequest;
 import br.com.itau.casadocodigo.cadastrocategoria.model.CategoriaResponse;
 import br.com.itau.casadocodigo.cadastrocategoria.repository.CategoriaRepository;
+import br.com.itau.casadocodigo.cadastrocategoria.validator.ProibeCategoriaDuplicadaAutorValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,20 +25,18 @@ public class CadastroCategoriaController {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final CategoriaRepository categoriaRepository;
+    @Autowired
+    private ProibeCategoriaDuplicadaAutorValidator proibeCategoriaDuplicadaAutorValidator;
 
-    public CadastroCategoriaController(CategoriaRepository categoriaRepository) {
-        this.categoriaRepository = categoriaRepository;
+    @InitBinder
+    public void init(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(proibeCategoriaDuplicadaAutorValidator);
     }
 
     @PostMapping(value = "/v1/categoria")
     @Transactional
     public ResponseEntity<CategoriaResponse> cadastro(@RequestBody @Valid CategoriaRequest categoriaRequest) {
         Categoria categoria = categoriaRequest.toModel();
-
-        if(categoriaRepository.findByNomeCategoria(categoria.getNomeCategoria()).isPresent()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
 
         entityManager.persist(categoria);
 
