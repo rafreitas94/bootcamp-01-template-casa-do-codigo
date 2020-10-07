@@ -2,6 +2,7 @@ package br.com.itau.casadocodigo.cadastrocategoria.controller;
 
 import br.com.itau.casadocodigo.cadastrocategoria.model.Categoria;
 import br.com.itau.casadocodigo.cadastrocategoria.model.CategoriaRequest;
+import br.com.itau.casadocodigo.cadastrocategoria.model.CategoriaResponse;
 import br.com.itau.casadocodigo.cadastrocategoria.repository.CategoriaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class CadastroCategoriaController {
 
     @PostMapping(value = "/v1/categoria")
     @Transactional
-    public ResponseEntity<Categoria> cadastro(@RequestBody @Valid CategoriaRequest categoriaRequest) {
+    public ResponseEntity<CategoriaResponse> cadastro(@RequestBody @Valid CategoriaRequest categoriaRequest) {
         Categoria categoria = categoriaRequest.toModel();
 
         if(categoriaRepository.findByNomeCategoria(categoria.getNomeCategoria()).isPresent()){
@@ -37,6 +38,6 @@ public class CadastroCategoriaController {
 
         entityManager.persist(categoria);
 
-        return ResponseEntity.status(HttpStatus.OK).body(categoria);
+        return ResponseEntity.status(HttpStatus.OK).body(new CategoriaResponse(categoria));
     }
 }
