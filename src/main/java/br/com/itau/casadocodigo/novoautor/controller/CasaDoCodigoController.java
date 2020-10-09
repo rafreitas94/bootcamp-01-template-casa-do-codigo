@@ -3,8 +3,6 @@ package br.com.itau.casadocodigo.novoautor.controller;
 import br.com.itau.casadocodigo.novoautor.model.Autor;
 import br.com.itau.casadocodigo.novoautor.model.AutorRequest;
 import br.com.itau.casadocodigo.novoautor.model.AutorResponse;
-import br.com.itau.casadocodigo.novoautor.model.ResultadoEmailResponse;
-import br.com.itau.casadocodigo.novoautor.repository.CasaDoCodigoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,28 +20,15 @@ public class CasaDoCodigoController {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final CasaDoCodigoRepository casaDoCodigoRepository;
-
-    public CasaDoCodigoController(CasaDoCodigoRepository casaDoCodigoRepository) {
-        this.casaDoCodigoRepository = casaDoCodigoRepository;
-    }
-
     /**
-     * Contagem de carga intrínseca no Controller: 6
+     * Contagem de carga intrínseca no Controller: 3
      * @param autorRequest recebe na entrada: nome, email e descricao
      * @return um Json de id, nome e data/hora
      */
     @PostMapping(value = "/v1/casadocodigo")
     @Transactional
-    public ResponseEntity<?> gravar(@RequestBody @Valid AutorRequest autorRequest){
+    public ResponseEntity<AutorResponse> gravar(@RequestBody @Valid AutorRequest autorRequest){
         Autor autor = autorRequest.toModel();
-
-        if (casaDoCodigoRepository.findByEmail(autor.getEmail()).isPresent()) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(ResultadoEmailResponse.duplicado(autor.getEmail())
-                            .get());
-        }
 
         entityManager.persist(autor);
         return ResponseEntity.status(HttpStatus.OK).body(new AutorResponse(autor));

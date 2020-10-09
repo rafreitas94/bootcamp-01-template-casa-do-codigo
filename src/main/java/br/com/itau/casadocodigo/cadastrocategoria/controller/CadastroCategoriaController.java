@@ -3,6 +3,7 @@ package br.com.itau.casadocodigo.cadastrocategoria.controller;
 import br.com.itau.casadocodigo.cadastrocategoria.model.Categoria;
 import br.com.itau.casadocodigo.cadastrocategoria.model.CategoriaRequest;
 import br.com.itau.casadocodigo.cadastrocategoria.model.CategoriaResponse;
+import br.com.itau.casadocodigo.cadastrocategoria.model.ResultadoCategoriaResponse;
 import br.com.itau.casadocodigo.cadastrocategoria.repository.CategoriaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +28,21 @@ public class CadastroCategoriaController {
         this.categoriaRepository = categoriaRepository;
     }
 
+    /**
+     * Contagem de carga intrínseca no Controller: 6
+     * @param categoriaRequest  recebe na entrada: nome da categoria
+     * @return um Json de id e o nome da categoria
+     */
     @PostMapping(value = "/v1/categoria")
     @Transactional
-    public ResponseEntity<CategoriaResponse> cadastro(@RequestBody @Valid CategoriaRequest categoriaRequest) {
+    public ResponseEntity<?> cadastro(@RequestBody @Valid CategoriaRequest categoriaRequest) {
         Categoria categoria = categoriaRequest.toModel();
 
-        if(categoriaRepository.findByNomeCategoria(categoria.getNomeCategoria()).isPresent()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        if(categoriaRepository.findByNomeCategoria(categoria.getNomeCategoria()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultadoCategoriaResponse.duplicado(categoria.getNomeCategoria()).get());
         }
 
         entityManager.persist(categoria);
-
         return ResponseEntity.status(HttpStatus.OK).body(new CategoriaResponse(categoria));
     }
 }

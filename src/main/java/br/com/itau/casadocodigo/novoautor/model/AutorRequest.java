@@ -1,5 +1,7 @@
 package br.com.itau.casadocodigo.novoautor.model;
 
+import br.com.itau.casadocodigo.validador.AtributoUnico;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -8,7 +10,7 @@ public class AutorRequest {
 
     @NotBlank
     private String nome;
-    @NotBlank
+    @AtributoUnico(nomeDoAtributo = "email", classeDeDominio = Autor.class) //Deve-se anotar o nome da variável com a anotação e sua classe de domínio
     @Email
     private String email;
     @NotBlank
