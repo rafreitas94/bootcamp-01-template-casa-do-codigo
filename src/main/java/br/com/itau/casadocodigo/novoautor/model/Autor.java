@@ -1,9 +1,8 @@
 package br.com.itau.casadocodigo.novoautor.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -14,9 +13,8 @@ import java.time.LocalDateTime;
 public class Autor {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String email;
     private String descricao;
@@ -37,11 +35,11 @@ public class Autor {
         this.descricao = descricao;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

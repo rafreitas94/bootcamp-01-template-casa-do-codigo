@@ -9,8 +9,6 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static com.fasterxml.jackson.annotation.JsonFormat.*;
-
 @Entity
 public class Livro {
 
@@ -26,7 +24,7 @@ public class Livro {
     private String sumario;
     @NotNull
     @Min(20)
-    private BigDecimal precoLivro;
+    private BigDecimal preco;
     @NotNull
     @Min(100)
     private int numeroPaginas;
@@ -36,10 +34,10 @@ public class Livro {
     @Future
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataLancamento;
-    @NotBlank
+    @NotNull
     @ManyToOne
     private Autor autor;
-    @NotBlank
+    @NotNull
     @ManyToOne
     private Categoria categoria;
 
@@ -47,16 +45,20 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
-                 @NotNull @Min(20) BigDecimal precoLivro, @NotNull @Min(100) int numeroPaginas,
-                 @NotBlank String isbn, @NotNull @Future LocalDate dataLancamento) {
+    public Livro(@NotBlank String titulo,
+                 @NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
+                 @NotNull @Min(20) BigDecimal preco, @Min(100) int numeroPaginas,
+                 @NotBlank String isbn, @Future @NotNull LocalDate dataLancamento,
+                 @NotNull Autor autor, @NotNull Categoria categoria) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
-        this.precoLivro = precoLivro;
+        this.preco = preco;
         this.numeroPaginas = numeroPaginas;
         this.isbn = isbn;
         this.dataLancamento = dataLancamento;
+        this.autor = autor;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -91,12 +93,12 @@ public class Livro {
         this.sumario = sumario;
     }
 
-    public BigDecimal getPrecoLivro() {
-        return precoLivro;
+    public BigDecimal getPreco() {
+        return preco;
     }
 
-    public void setPrecoLivro(BigDecimal precoLivro) {
-        this.precoLivro = precoLivro;
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 
     public int getNumeroPaginas() {

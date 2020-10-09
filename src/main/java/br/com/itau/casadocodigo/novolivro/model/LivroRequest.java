@@ -1,7 +1,12 @@
 package br.com.itau.casadocodigo.novolivro.model;
 
+import br.com.itau.casadocodigo.cadastrocategoria.model.Categoria;
+import br.com.itau.casadocodigo.novoautor.model.Autor;
+import br.com.itau.casadocodigo.validador.AtributoNaoNulo;
+import br.com.itau.casadocodigo.validador.AtributoUnico;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.EntityManager;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,20 +22,23 @@ public class LivroRequest {
     private String sumario;
     @NotNull
     @Min(20)
-    private BigDecimal precoLivro;
+    private BigDecimal preco;
     @NotNull
     @Min(100)
     private int numeroPaginas;
     @NotBlank
+    @AtributoUnico(nomeDoAtributo = "isbn", classeDeDominio = Livro.class)
     private String isbn;
     @NotNull
     @Future
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataLancamento;
     @NotNull
+    @AtributoNaoNulo(nomeDoAtributo = "id", classeDeDominio = Autor.class)
     private Long idAutor;
     @NotNull
-    private Long idCadastro;
+    @AtributoNaoNulo(nomeDoAtributo = "id", classeDeDominio = Categoria.class)
+    private Long idCategoria;
 
     public String getTitulo() {
         return titulo;
@@ -44,8 +52,8 @@ public class LivroRequest {
         return sumario;
     }
 
-    public BigDecimal getPrecoLivro() {
-        return precoLivro;
+    public BigDecimal getPreco() {
+        return preco;
     }
 
     public int getNumeroPaginas() {
@@ -64,12 +72,15 @@ public class LivroRequest {
         return idAutor;
     }
 
-    public Long getIdCadastro() {
-        return idCadastro;
+    public Long getIdCategoria() {
+        return idCategoria;
     }
 
-    public Livro toModel(){
-        return new Livro(this.titulo, this.resumo, this.sumario, this.precoLivro, this.numeroPaginas,
-                this.isbn, this.dataLancamento);
+    public Livro toModel(EntityManager entityManager){
+        Autor autor = entityManager.find(Autor.class, this.idAutor);
+        Categoria categoria = entityManager.find(Categoria.class, this.idCategoria);
+
+        return new Livro(this.titulo, this.resumo, this.sumario, this.preco, this.numeroPaginas,
+                this.isbn, this.dataLancamento, autor, categoria);
     }
 }

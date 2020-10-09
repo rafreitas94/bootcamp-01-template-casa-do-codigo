@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 
 public class AutorResponse {
 
-    private final String id;
+    private final Long id;
     private final String nome;
     private final LocalDateTime horaCadastro;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
