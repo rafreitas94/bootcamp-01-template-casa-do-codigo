@@ -1,11 +1,14 @@
 package br.com.itau.casadocodigo.novoautor.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class AutorResponse {
 
     private final Long id;
     private final String nome;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private final LocalDateTime horaCadastro;
 
     public Long getId() {

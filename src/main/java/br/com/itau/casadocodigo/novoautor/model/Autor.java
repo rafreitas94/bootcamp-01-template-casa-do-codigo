@@ -1,5 +1,7 @@
 package br.com.itau.casadocodigo.novoautor.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,7 @@ public class Autor {
     private String nome;
     private String email;
     private String descricao;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime horaCadastro = LocalDateTime.now();
 
     @Deprecated
