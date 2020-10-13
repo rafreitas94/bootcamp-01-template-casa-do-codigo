@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class AtributoNaoNuloValidator implements ConstraintValidator<AtributoNaoNulo, Long> {
+public class AtributoNaoExistenteValidator implements ConstraintValidator<AtributoNaoExistente, Long> {
 
     private String nomeAtributo;
     private Class<?> classeDominio;
@@ -16,7 +16,7 @@ public class AtributoNaoNuloValidator implements ConstraintValidator<AtributoNao
     private EntityManager manager;
 
     @Override
-    public void initialize(AtributoNaoNulo params) {
+    public void initialize(AtributoNaoExistente params) {
         nomeAtributo = params.nomeDoAtributo();
         classeDominio = params.classeDeDominio();
     }

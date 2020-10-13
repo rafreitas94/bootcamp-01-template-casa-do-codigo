@@ -2,7 +2,7 @@ package br.com.itau.casadocodigo.novolivro.model;
 
 import br.com.itau.casadocodigo.cadastrocategoria.model.Categoria;
 import br.com.itau.casadocodigo.novoautor.model.Autor;
-import br.com.itau.casadocodigo.validador.AtributoNaoNulo;
+import br.com.itau.casadocodigo.validador.AtributoNaoExistente;
 import br.com.itau.casadocodigo.validador.AtributoUnico;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -34,10 +34,10 @@ public class LivroRequest {
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataLancamento;
     @NotNull
-    @AtributoNaoNulo(nomeDoAtributo = "id", classeDeDominio = Autor.class)
+    @AtributoNaoExistente(nomeDoAtributo = "id", classeDeDominio = Autor.class)
     private Long idAutor;
     @NotNull
-    @AtributoNaoNulo(nomeDoAtributo = "id", classeDeDominio = Categoria.class)
+    @AtributoNaoExistente(nomeDoAtributo = "id", classeDeDominio = Categoria.class)
     private Long idCategoria;
 
     public String getTitulo() {

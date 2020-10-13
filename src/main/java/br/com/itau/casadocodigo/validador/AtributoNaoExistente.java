@@ -8,8 +8,8 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = AtributoNaoNuloValidator.class) //Precisamos dizer que a nossa anotação é uma Constraint
-public @interface AtributoNaoNulo {
+@Constraint(validatedBy = AtributoNaoExistenteValidator.class) //Precisamos dizer que a nossa anotação é uma Constraint
+public @interface AtributoNaoExistente {
 
 //    Texto deve ser genérico para o retorno da informação
     String message() default "Atributo não existe no banco";
