@@ -22,7 +22,7 @@ public class CategoriaRequest {
     public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
     }
-
+//1
     public Categoria toModel(){
         return new Categoria(this.nomeCategoria);
     }

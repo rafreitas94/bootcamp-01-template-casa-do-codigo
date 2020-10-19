@@ -32,7 +32,7 @@ public class EstadoRequest {
     public void setIdPais(Long idPais) {
         this.idPais = idPais;
     }
-
+//1
     public Estado toModel(EntityManager entityManager) {
         @NotNull
         Pais paisSelecionado = entityManager.find(Pais.class, this.idPais);

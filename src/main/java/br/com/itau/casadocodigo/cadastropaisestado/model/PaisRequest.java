@@ -7,14 +7,14 @@ import javax.validation.constraints.NotBlank;
 public class PaisRequest {
 
     @NotBlank
-    @AtributoUnico(nomeDoAtributo = "nomePais", classeDeDominio = Pais.class)
-    private String nomePais;
+    @AtributoUnico(nomeDoAtributo = "pais", classeDeDominio = Pais.class)
+    private String pais;
 
-    public String getNomePais() {
-        return nomePais;
+    public String getPais() {
+        return pais;
     }
 
     public Pais toModel() {
-        return new Pais(this.nomePais);
+        return new Pais(this.pais);
     }
 }

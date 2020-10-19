@@ -3,8 +3,6 @@ package br.com.itau.casadocodigo.exibelivros.model;
 import br.com.itau.casadocodigo.cadastrocategoria.model.Categoria;
 import br.com.itau.casadocodigo.novoautor.model.Autor;
 import br.com.itau.casadocodigo.novolivro.model.Livro;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

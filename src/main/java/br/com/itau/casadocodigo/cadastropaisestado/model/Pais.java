@@ -14,14 +14,14 @@ public class Pais {
     private Long id;
 
     @NotBlank
-    private String nomePais;
+    private String pais;
 
     @Deprecated
     public Pais() {
     }
 
-    public Pais(@NotBlank String nomePais) {
-        this.nomePais = nomePais;
+    public Pais(@NotBlank String pais) {
+        this.pais = pais;
     }
 
     public Long getId() {
@@ -32,11 +32,11 @@ public class Pais {
         this.id = id;
     }
 
-    public String getNomePais() {
-        return nomePais;
+    public String getPais() {
+        return pais;
     }
 
-    public void setNomePais(String nomePais) {
-        this.nomePais = nomePais;
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 }

@@ -75,7 +75,7 @@ public class LivroRequest {
     public Long getIdCategoria() {
         return idCategoria;
     }
-
+//1
     public Livro toModel(EntityManager entityManager){
         Autor autor = entityManager.find(Autor.class, this.idAutor);
         Categoria categoria = entityManager.find(Categoria.class, this.idCategoria);

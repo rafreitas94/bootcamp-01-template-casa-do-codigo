@@ -48,4 +48,8 @@ public class Estado {
     public void setPais(Pais pais) {
         this.pais = pais;
     }
+//1
+    public boolean ValidaEstadoAoPais(Pais pais) {
+        return this.pais.equals(pais);
+    }
 }

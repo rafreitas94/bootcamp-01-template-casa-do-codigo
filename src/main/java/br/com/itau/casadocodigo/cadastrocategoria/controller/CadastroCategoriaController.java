@@ -29,7 +29,7 @@ public class CadastroCategoriaController {
     }
 
     /**
-     * Contagem de carga intrínseca no Controller: 6
+     * Contagem de carga intrínseca no Controller: 4
      * @param categoriaRequest  recebe na entrada: nome da categoria
      * @return um Json de id e o nome da categoria
      */

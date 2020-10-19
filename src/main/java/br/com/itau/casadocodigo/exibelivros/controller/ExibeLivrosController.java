@@ -31,7 +31,7 @@ public class ExibeLivrosController {
     }
 
     /**
-     * Contagem de carga intrínseca no Controller: 2
+     * Contagem de carga intrínseca no Controller: 3
      * @param id do livro
      * @return o detalhe do livro específico
      */
