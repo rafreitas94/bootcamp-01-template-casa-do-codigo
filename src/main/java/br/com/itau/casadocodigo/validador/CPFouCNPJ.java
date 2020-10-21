@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 public @interface CPFouCNPJ {
 
     //    Texto deve ser genérico para o retorno da informação
-    String message() default "CPF ou CNPJ inválido. Padrão: XXX.XXX.XXX-XX ou XX.XXX.XXX/XXXX-XX";
+    String message() default "inválido. Padrão: XXX.XXX.XXX-XX ou XX.XXX.XXX/XXXX-XX";
 
     Class<?>[] groups() default {};
 

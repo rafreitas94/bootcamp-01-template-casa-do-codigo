@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 public @interface AtributoNaoExistente {
 
 //    Texto deve ser genérico para o retorno da informação
-    String message() default "Atributo não existe no banco";
+    String message() default "não existe no banco";
 
     Class<?>[] groups() default {};
 

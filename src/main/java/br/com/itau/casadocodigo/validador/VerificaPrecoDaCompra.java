@@ -31,8 +31,7 @@ public class VerificaPrecoDaCompra implements Validator {
         }
 //1
         if (!clienteRequest.getCompraRequest().valorTotalEhValido(valorTotalCalculado)) {
-            errors.rejectValue("compraRequest", null, "Preço do carrinho não corresponde ao preço total dos livros. " +
-                    "Preço cadastrado: R$" + valorTotalCalculado);
+            errors.rejectValue("compraRequest", null, "não corresponde ao preço total dos livros.");
         }
     }
 }

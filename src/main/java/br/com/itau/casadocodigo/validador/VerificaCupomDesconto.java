@@ -34,14 +34,14 @@ public class VerificaCupomDesconto implements Validator {
         Optional<Cupom> cupom = cupomRepository.findByCodigo(clienteRequest.getCodigoDesconto());
 
         if (cupom.isEmpty()) {
-            errors.rejectValue("codigoDesconto", null, "Código de desconto (" +
-                    clienteRequest.getCodigoDesconto() + ") não existe. Tente novamente.");
+            errors.rejectValue("codigoDesconto", null, "(" +
+                    clienteRequest.getCodigoDesconto() + ") não existe.");
         }
 
         if (cupom.isPresent()) {
             if (!cupom.get().ehValido()) {
-                errors.rejectValue("codigoDesconto", null, "Código de desconto (" +
-                        clienteRequest.getCodigoDesconto() + ") expirado. Tente novamente");
+                errors.rejectValue("codigoDesconto", null, "(" +
+                        clienteRequest.getCodigoDesconto() + ") expirado.");
             }
         }
     }

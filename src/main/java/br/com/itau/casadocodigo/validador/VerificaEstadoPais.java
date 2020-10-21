@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 public @interface VerificaEstadoPais {
 
     //    Texto deve ser genérico para o retorno da informação
-    String message() default "Este estado não corresponde ao país.";
+    String message() default "não corresponde ao país.";
 
     Class<?>[] groups() default {};
 

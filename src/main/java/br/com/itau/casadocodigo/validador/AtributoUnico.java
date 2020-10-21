@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 public @interface AtributoUnico {
 
 //    Texto deve ser genérico para o retorno da informação
-    String message() default "Atributo já cadastrado no banco";
+    String message() default "já cadastrado no banco";
 
     Class<?>[] groups() default {};
 
