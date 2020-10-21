@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Entity
@@ -16,6 +17,7 @@ public class Compra {
     @NotNull
     @Positive
     private BigDecimal total;
+    private BigDecimal totalComDesconto;
     @NotNull
     @Size(min = 1)
     @ElementCollection
@@ -28,8 +30,9 @@ public class Compra {
     public Compra() {
     }
 
-    public Compra(@NotNull @Positive BigDecimal total, @NotNull List<Itens> itens) {
+    public Compra(@NotNull @Positive BigDecimal total, BigDecimal totalComDesconto, @NotNull @Size(min = 1) List<Itens> itens) {
         this.total = total;
+        this.totalComDesconto = totalComDesconto;
         this.itens = itens;
     }
 
@@ -49,11 +52,26 @@ public class Compra {
         this.total = total;
     }
 
+    public BigDecimal getTotalComDesconto() {
+        return totalComDesconto;
+    }
+
+    public void setTotalComDesconto(BigDecimal totalComDesconto) {
+        this.totalComDesconto = totalComDesconto;
+    }
+
     public List<Itens> getItens() {
         return itens;
     }
 
     public void setItens(List<Itens> itens) {
         this.itens = itens;
+    }
+//1
+    public void aplicaDesconto(CupomDesconto cupomDesconto) {
+        BigDecimal percentualDesconto = cupomDesconto.getPercentualDesconto();
+        BigDecimal valorDoPercentual = percentualDesconto.divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_DOWN);
+        BigDecimal valorDoDesconto = this.total.multiply(valorDoPercentual).setScale(2, RoundingMode.HALF_DOWN);
+        this.totalComDesconto = this.total.subtract(valorDoDesconto);
     }
 }

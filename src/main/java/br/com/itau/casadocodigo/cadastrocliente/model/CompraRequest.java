@@ -1,6 +1,5 @@
 package br.com.itau.casadocodigo.cadastrocliente.model;
 
-import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
@@ -30,9 +29,17 @@ public class CompraRequest {
         return itens;
     }
 
-    public Compra toCompraModel() {
-        return new Compra(this.total, this.itens.stream()
-                .map(item -> new ItensRequest(item.getIdLivro(), item.getQuantidade()).toItensModel()).collect(Collectors.toList()));
+    public Compra toCompraModel(CupomDesconto cupomDesconto) { //1
+        BigDecimal totalComDesconto = new BigDecimal(0);
+
+        Compra compra = new Compra(this.total, totalComDesconto , this.itens.stream()
+                .map(item -> new ItensRequest(item.getIdLivro(), item.getQuantidade()).toItensModel()) //1
+                .collect(Collectors.toList()));
+
+        if (cupomDesconto != null) { //1
+            compra.aplicaDesconto(cupomDesconto);
+        }
+        return compra;
     }
 
     public boolean valorTotalEhValido(BigDecimal valorTotalDB) {

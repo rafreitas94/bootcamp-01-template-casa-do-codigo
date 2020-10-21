@@ -31,13 +31,15 @@ public class Cliente {
     @NotBlank
     private String pais;
     @NotBlank
-    private String estado; //caso aquele pais tenha estado
+    private String estado;
     @NotBlank
     private String telefone;
     @NotBlank
     private String cep;
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.PERSIST)
     private Compra compra;
+    @Embedded
+    private CupomDesconto cupomDesconto;
 
     @Deprecated
     public Cliente() {
@@ -46,7 +48,7 @@ public class Cliente {
     public Cliente(@NotBlank @Email String email, @NotBlank String nome, @NotBlank String sobrenome,
                    @NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
                    @NotBlank String cidade, @NotBlank String pais, @NotBlank String estado,
-                   @NotBlank String telefone, @NotBlank String cep, Compra compra) {
+                   @NotBlank String telefone, @NotBlank String cep, Compra compra, CupomDesconto cupomDesconto) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -59,6 +61,7 @@ public class Cliente {
         this.telefone = telefone;
         this.cep = cep;
         this.compra = compra;
+        this.cupomDesconto = cupomDesconto;
     }
 
     public Long getId() {
@@ -163,5 +166,13 @@ public class Cliente {
 
     public void setCompra(Compra compra) {
         this.compra = compra;
+    }
+
+    public CupomDesconto getCupom() {
+        return cupomDesconto;
+    }
+
+    public void setCupom(CupomDesconto cupomDesconto) {
+        this.cupomDesconto = cupomDesconto;
     }
 }

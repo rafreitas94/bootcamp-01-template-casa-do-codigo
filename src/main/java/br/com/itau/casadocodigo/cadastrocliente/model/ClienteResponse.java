@@ -11,10 +11,10 @@ public class ClienteResponse {
     private final String complemento;
     private final String cidade;
     private final String pais;
-    private final String estado; //caso aquele pais tenha estado
+    private final String estado;
     private final String telefone;
     private final String cep;
-    private final Compra compra;
+    private final CompraResponse compraResponse;
 
     public Long getId() {
         return id;
@@ -64,8 +64,8 @@ public class ClienteResponse {
         return cep;
     }
 
-    public Compra getCompra() {
-        return compra;
+    public CompraResponse getCompraResponse() {
+        return compraResponse;
     }
 
     public ClienteResponse(Cliente cliente) {
@@ -81,6 +81,6 @@ public class ClienteResponse {
         this.estado = cliente.getEstado();
         this.telefone = cliente.getTelefone();
         this.cep = cliente.getCep();
-        this.compra = cliente.getCompra();
+        this.compraResponse = new CompraResponse(cliente.getCompra());
     }
 }

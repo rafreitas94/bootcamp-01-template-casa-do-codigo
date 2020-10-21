@@ -1,11 +1,16 @@
 package br.com.itau.casadocodigo.cadastrocliente.model;
 
+import br.com.itau.casadocodigo.cadastrocliente.repository.CupomRepository;
+import br.com.itau.casadocodigo.cadastrocupom.model.Cupom;
+import br.com.itau.casadocodigo.cadastropaisestado.model.Estado;
 import br.com.itau.casadocodigo.validador.CPFouCNPJ;
+import br.com.itau.casadocodigo.validador.VerificaEstadoPais;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public class ClienteRequest {
 
@@ -28,17 +33,19 @@ public class ClienteRequest {
     @NotBlank
     private final String pais;
     @NotBlank
+    @VerificaEstadoPais(nomeDoAtributo = "estado", classeDeDominio = Estado.class) //1
     private final String estado;
     @NotBlank
     private final String telefone;
     @NotBlank
     private final String cep;
     private final CompraRequest compraRequest;
+    private final String codigoDesconto;
 
     public ClienteRequest(@NotBlank @Email String email, @NotBlank String nome, @NotBlank String sobrenome,
                           @NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
                           @NotBlank String cidade, @NotBlank String pais, @NotBlank String estado,
-                          @NotBlank String telefone, @NotBlank String cep, CompraRequest compraRequest) {
+                          @NotBlank String telefone, @NotBlank String cep, CompraRequest compraRequest, String codigoDesconto) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -51,6 +58,7 @@ public class ClienteRequest {
         this.telefone = telefone;
         this.cep = cep;
         this.compraRequest = compraRequest;
+        this.codigoDesconto = codigoDesconto;
     }
 
     public String getEmail() {
@@ -100,10 +108,21 @@ public class ClienteRequest {
     public CompraRequest getCompraRequest() {
         return compraRequest;
     }
-//1
-    public Cliente toClienteModel() {
+
+    public String getCodigoDesconto() {
+        return codigoDesconto;
+    }
+
+//1 1 1 1 1
+    public Cliente toClienteModel(CupomRepository cupomRepository) {
+        Optional<Cupom> cupomCadastrado = cupomRepository.findByCodigo(this.codigoDesconto);
+
+        CupomDesconto cupomDesconto = cupomCadastrado
+                .map(cupom -> new CupomDesconto(cupom.getPercentual(), cupom.getValidade()))
+                .orElse(null);
+
         return new Cliente(this.email, this.nome, this.sobrenome, this.documento, this.endereco, this.complemento,
-                this.cidade, this.pais, this.estado, this.telefone, this.cep, this.compraRequest.toCompraModel());
+                this.cidade, this.pais, this.estado, this.telefone, this.cep, this.compraRequest.toCompraModel(cupomDesconto), cupomDesconto);
     }
 //1
     public BigDecimal precoDoLivro(int posicaoDoLivro, EntityManager entityManager) {

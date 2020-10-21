@@ -85,4 +85,8 @@ public class Cupom {
         this.id = cupomCadastrado.getId();
         entityManager.merge(this);
     }
+
+    public Boolean ehValido() {
+        return LocalDate.now().compareTo(this.validade) < 0;
+    }
 }
